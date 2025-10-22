@@ -1,0 +1,115 @@
+.comments-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body.dark .comments-section,
+body.dark .comment-item{
+  background-color: #0f172a;
+}
+
+body.dark .comments-section h3,
+body.dark .comment-content span,
+body.dark .comment-content p,
+body.dark .comment-content small{
+  color: rgb(246, 210, 210);
+}
+
+.comments-section h3 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.25rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.comments-section > p {
+  color: #666;
+  font-style: italic;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.comment-item {
+  display: flex;             /* horizontal layout */
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 3px solid #007bff;
+  transition: background-color 0.2s ease;
+}
+
+.comment-item:hover {
+  background-color: #f0f2f5;
+}
+
+/* Comment header: avatar + content */
+.comment-user {
+  flex-shrink: 0;            /* avatar does not shrink */
+}
+
+.comment-user .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+/* Content next to avatar */
+.comment-content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.75rem;      /* space between avatar and content */
+  flex: 1;
+}
+
+.comment-content .username {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.comment-content p {
+  margin: 0;
+  color: #444;
+  line-height: 1.5;
+  font-size: 0.95rem;
+  word-wrap: break-word;
+}
+
+.comment-content small {
+  margin-top: 0.25rem;
+  color: #888;
+  font-size: 0.8rem;
+  align-self: flex-end;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .comments-section {
+    padding: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .comment-user .avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .comment-content .username {
+    font-size: 0.9rem;
+  }
+
+  .comment-content p {
+    font-size: 0.9rem;
+  }
+
+  .comment-content small {
+    font-size: 0.75rem;
+  }
+}

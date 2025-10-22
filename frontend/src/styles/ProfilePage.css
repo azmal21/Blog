@@ -1,0 +1,367 @@
+/* ProfilePage.css */
+
+* {
+  box-sizing: border-box;
+}
+
+.profile-page {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 60px 30px;
+  min-height: 100vh;
+  background: #f8fafc;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+body.dark .profile-page,
+body.dark .loading,
+body.dark .user-section,
+body.dark  .user-info h2{
+    background-color: #0f172a;
+    color: white
+}
+
+/* Loading State */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.4rem;
+  color: #64748b;
+  background: #f8fafc;
+  font-weight: 500;
+}
+
+/* User Section */
+.user-section {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 50px;
+  margin-bottom: 40px;
+  border: 1px solid #e2e8f0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  max-width: 800px;
+  margin: 0 auto; /* centers block element horizontally */
+
+}
+
+.user-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+}
+
+/* Avatar */
+.avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 auto 30px;
+  border: 4px solid #ffffff;
+  box-shadow: 0 10px 40px rgba(59, 130, 246, 0.2);
+}
+
+/* User Info */
+.user-info {
+  text-align: center;
+}
+
+.user-info h2 {
+  margin: 0 0 12px 0;
+  font-size: 2.5rem;
+  color: #0f172a;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.email {
+  margin: 0 0 20px 0;
+  font-size: 1.1rem;
+  color: #64748b;
+  font-weight: 400;
+}
+
+.bio {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #475569;
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* No User Message */
+.no-user {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #64748b;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  margin-bottom: 40px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Bio Section */
+.bio-section {
+  margin-top: 20px;
+}
+
+.bio-section .bio {
+  margin-bottom: 15px;
+}
+
+.edit-bio-btn {
+  padding: 10px 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #3b82f6;
+  background: transparent;
+  border: 2px solid #3b82f6;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.edit-bio-btn:hover {
+  background: #3b82f6;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Bio Edit Section */
+.bio-edit {
+  margin-top: 20px;
+}
+
+.bio-edit textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 14px;
+  font-size: 1rem;
+  color: #0f172a;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-family: inherit;
+  resize: vertical;
+  transition: all 0.3s ease;
+}
+
+.bio-edit textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: #ffffff;
+}
+
+.bio-edit textarea::placeholder {
+  color: #94a3b8;
+}
+
+.bio-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+  justify-content: center;
+}
+
+.save-btn,
+.cancel-btn {
+  padding: 10px 28px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.save-btn {
+  background: #10b981;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.save-btn:hover {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(5, 150, 105, 0.3);
+}
+
+.cancel-btn {
+  background: transparent;
+  color: #64748b;
+  border: 2px solid #e2e8f0;
+}
+
+.cancel-btn:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+/* Profile Buttons Container */
+.profile-buttons {
+  display: flex;
+  gap: 16px;
+  max-width: 400px;
+  margin: 15px auto;
+}
+
+.profile-buttons button {
+  flex: 1;
+  padding: 18px 40px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  border: none;
+}
+
+.profile-buttons button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.profile-buttons button:hover::before {
+  left: 100%;
+}
+
+.primary-btn {
+  color: #ffffff;
+  background: #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.primary-btn:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+}
+
+.primary-btn:active {
+  transform: translateY(0);
+}
+
+.secondary-btn {
+  color: #ffffff;
+  background: #8b5cf6;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+.secondary-btn:hover {
+  background: #7c3aed;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.3);
+}
+
+.secondary-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 40px 20px;
+  }
+
+  .user-section {
+    padding: 40px 25px;
+  }
+
+  .avatar {
+    width: 110px;
+    height: 110px;
+    font-size: 2.8rem;
+  }
+
+  .user-info h2 {
+    font-size: 2rem;
+  }
+
+  .email {
+    font-size: 1rem;
+  }
+
+  .bio {
+    font-size: 0.95rem;
+  }
+
+  .profile-buttons {
+    flex-direction: column;
+  }
+
+  .profile-buttons button {
+    font-size: 1rem;
+    padding: 16px 32px;
+  }
+
+  .bio-edit textarea {
+    min-height: 80px;
+    font-size: 0.95rem;
+  }
+
+  .edit-bio-btn {
+    font-size: 0.9rem;
+    padding: 8px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-page {
+    padding: 30px 15px;
+  }
+
+  .user-section {
+    padding: 30px 20px;
+  }
+
+  .avatar {
+    width: 90px;
+    height: 90px;
+    font-size: 2.2rem;
+  }
+
+  .user-info h2 {
+    font-size: 1.7rem;
+  }
+
+  .email {
+    font-size: 0.95rem;
+  }
+
+  .bio-edit textarea {
+    font-size: 0.9rem;
+  }
+
+  .bio-buttons {
+    flex-direction: column;
+  }
+
+  .edit-bio-btn {
+    font-size: 0.85rem;
+  }
+}

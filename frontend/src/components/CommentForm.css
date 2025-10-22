@@ -1,0 +1,123 @@
+/* CommentForm.css */
+
+.comment-form {
+  background: #ffffff;
+  border: 1px solid #e1e8ed;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+body.dark .comment-form,
+body.dark .comment-form textarea{
+  background-color: #0f172a;
+  color: white;
+}
+
+.comment-form:hover {
+  border-color: #3498db;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.1);
+}
+
+.comment-form textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #2c3e50;
+  background-color: #fafbfc;
+  resize: vertical;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.comment-form textarea:focus {
+  outline: none;
+  border-color: #3498db;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.comment-form textarea::placeholder {
+  color: #95a5a6;
+  font-style: italic;
+}
+
+.comment-form button {
+  margin-top: 1rem;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+  float: right;
+}
+
+.comment-form button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2980b9, #21618c);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+}
+
+.comment-form button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.comment-form button:disabled {
+  background: linear-gradient(135deg, #bdc3c7, #95a5a6);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+/* Clear float for proper layout */
+.comment-form::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .comment-form {
+    padding: 1.2rem;
+  }
+
+  .comment-form button {
+    float: none;
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .comment-form {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .comment-form textarea {
+    min-height: 70px;
+    padding: 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  .comment-form button {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
