@@ -141,29 +141,7 @@
   transform: translateY(0);
 }
 
-.back-button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background: transparent;
-  color: black;
-  border: none;
-  padding: 10px 20px;
- 
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
- 
- 
-}
 
-.back-button:hover {
-  background-color: #e3e6f5;
-}
-
-.back-button:active {
-  transform: translateY(0);
-}
 
 body.dark .back-button {
   background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
