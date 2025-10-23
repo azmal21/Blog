@@ -1,6 +1,6 @@
 .notifications-container {
     position: absolute;
-    right: 0;
+    right: 0px;
     top: 40px;
     width: 400px;
     background: #222;
@@ -16,9 +16,8 @@
 
 @media (max-width: 500px) {
     .notifications-container {
-        right: 5px;           /* stay close to right edge */
         width: auto;          /* take natural width */
         max-width: 95vw;      /* don't overflow viewport */
-        min-width: 250px;     /* maintain readability */
+        min-width: 240px;     /* maintain readability */
     }
 }

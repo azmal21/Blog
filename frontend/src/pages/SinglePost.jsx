@@ -122,6 +122,14 @@ const SinglePost = () => {
     }
   }, [id, post]);
 
+  // Helper function to get post image
+  const getPostImageUrl = (image) => {
+    if (!image) return "/default-image.jpg"; // fallback default
+    if (image.startsWith("http")) return image; // Cloudinary URL
+    return `http://localhost:5000${image}`; // Local uploads fallback
+  };
+
+
   if (loading) return <p className="loading-text">Loading post...</p>;
   if (!post) return <p className="error-text">Post not found.</p>;
 
@@ -161,11 +169,10 @@ const SinglePost = () => {
       />
 
 
-      {post.image && (
-        <div className="single-post-image-wrapper">
-          <img src={`http://localhost:5000${post.image}`} alt={post.title} className="single-post-image" />
-        </div>
-      )}
+      <div className="single-post-image-wrapper">
+        <img src={getPostImageUrl(post.image)} alt={post.title} className="single-post-image" />
+      </div>
+
 
       <div className="single-post-content" dangerouslySetInnerHTML={{ __html: post.content }} />
 

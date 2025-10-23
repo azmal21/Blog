@@ -25,6 +25,7 @@ const EditPost = () => {
   const [loading, setLoading] = useState(true);
   const [isCustomCategory, setIsCustomCategory] = useState(false);
   const [customCategory, setCustomCategory] = useState("");
+  const [updating, setUpdating] = useState(false);
 
   // ✅ Memoized Quill toolbar and formats
   const modules = useMemo(
@@ -132,15 +133,16 @@ const EditPost = () => {
       e.preventDefault();
 
       try {
+        setUpdating(true);
         const data = new FormData();
         for (const key in formData) {
           const value =
             key === "tags"
               ? formData[key]
-                  .split(",")
-                  .map((t) => t.trim())
-                  .filter(Boolean)
-                  .join(",")
+                .split(",")
+                .map((t) => t.trim())
+                .filter(Boolean)
+                .join(",")
               : formData[key];
           data.append(key, value);
         }
@@ -160,6 +162,8 @@ const EditPost = () => {
       } catch (err) {
         console.error("Error updating post:", err);
         toast.error(err.response?.data?.message || "Error updating post");
+      } finally {
+        setUpdating(false);
       }
     },
     [formData, image, id, navigate]
@@ -244,7 +248,9 @@ const EditPost = () => {
 
         <input type="file" onChange={handleImageChange} ref={imageRef} />
 
-        <button type="submit">Update Post</button>
+        <button type="submit" disabled={updating}>
+          {updating ? "Updating Post..." : "Update Post"}
+        </button>
       </form>
 
       <ToastContainer

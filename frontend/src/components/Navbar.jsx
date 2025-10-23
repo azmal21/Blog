@@ -21,9 +21,12 @@ const Navbar = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
     toast.error("You’ve been Logged out");
-    setIsLoggedIn(false);
-    setMenuOpen(false);
+    setTimeout(() => {
+      setIsLoggedIn(false);
+      setMenuOpen(false);
+    }, 500); 
   };
+
 
   const navLinks = [
     { to: "/", label: "Home", icon: <FaHome /> },

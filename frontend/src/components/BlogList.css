@@ -1,36 +1,29 @@
+.blog-list-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
 
 .post-heading {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 2rem;
   text-align: center;
-  padding: 20px 0;
-  color: #333;
 }
 
-/* Container for all blog cards */
 .all-posts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.load-more-container {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
-  padding: 15px;
-}
-
-
-.all-posts > * {
-  flex: 1 1 300px; /* grow & shrink nicely */
-  max-width: 400px; /* prevent stretching too wide */
-}
-
-/* Center when only one post */
-.all-posts.single {
-  justify-content: center;
-}
-
-/* For 2 posts, keep them centered */
-.all-posts.two-posts {
-  justify-content: center;
-  gap: 30px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 /* Dark mode styles */
@@ -102,29 +95,56 @@ body.dark .post-heading {
 }
 
 @keyframes spinnerRotate {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
+  to {
     transform: rotate(360deg);
   }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .all-posts > * {
-    flex: 1 1 250px;
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .blog-list-container {
+    max-width: 1100px;
+  }
+  
+  .all-posts {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
   }
 }
 
-@media (max-width: 480px) {
-  .all-posts {
-    flex-direction: column;
-    align-items: center;
+@media (max-width: 900px) {
+  .blog-list-container {
+    padding: 1.5rem 1rem;
   }
 
   .post-heading {
-    font-size: 1.6rem;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .all-posts {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .load-more-btn {
+    padding: 10px 28px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .post-heading {
+    font-size: 1.75rem;
+  }
+
+  .all-posts {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .load-more-btn {
+    width: 100%;
+    max-width: 300px;
   }
 }

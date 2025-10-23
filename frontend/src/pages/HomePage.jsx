@@ -6,6 +6,8 @@ import Footer from "../components/Footer";
 import usePostStore from "../store/postStore";
 import "../styles/HomePage.css";
 
+const SKELETON_COUNT = 8; // number of skeleton cards to show
+
 const HomePage = () => {
   const { posts, setPosts } = usePostStore(); // get posts from store
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -19,25 +21,24 @@ const HomePage = () => {
         try {
           setLoading(true);
           const { data } = await api.get("/posts");
-          setPosts(data); // save to store
+          setPosts(data);
         } catch (err) {
           console.error("Error fetching posts:", err);
         } finally {
           setLoading(false);
         }
       };
-
       fetchPosts();
     }
   }, [posts.length, setPosts]);
 
-  // Get unique categories (memoized)
+  // Unique categories
   const categories = useMemo(() => {
     const cats = posts.map((post) => post.category);
     return ["All", ...new Set(cats)];
   }, [posts]);
 
-  // Filtered posts (memoized)
+  // Filtered posts
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
       const categoryMatch =
@@ -55,7 +56,16 @@ const HomePage = () => {
     });
   }, [posts, selectedCategory, searchTerm]);
 
-  if (loading) return <p>Loading posts...</p>;
+  // Skeleton loader JSX
+  const renderSkeletons = () => {
+    return Array.from({ length: SKELETON_COUNT }).map((_, i) => (
+      <div key={i} className="skeleton-card">
+        <div className="skeleton-image" />
+        <div className="skeleton-title" />
+        <div className="skeleton-subtitle" />
+      </div>
+    ));
+  };
 
   return (
     <div className="home-page-container">
@@ -74,9 +84,7 @@ const HomePage = () => {
         {categories.map((category) => (
           <button
             key={category}
-            className={`category-btn ${
-              selectedCategory === category ? "active" : ""
-            }`}
+            className={`category-btn ${selectedCategory === category ? "active" : ""}`}
             onClick={() => setSelectedCategory(category)}
           >
             {category}
@@ -84,7 +92,16 @@ const HomePage = () => {
         ))}
       </div>
 
-      <BlogList posts={filteredPosts} />
+      {/* Post List / Skeletons */}
+      <div className="posts-section">
+        {loading ? (
+          <div className="skeleton-grid">{renderSkeletons()}</div>
+        ) : (
+          <BlogList posts={filteredPosts} />
+        )}
+      </div>
+
+
       <Footer />
     </div>
   );

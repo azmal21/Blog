@@ -21,7 +21,9 @@ const MyPosts = () => {
 
     const fetchMyPosts = async () => {
       try {
-        const { data } = await api.get("/posts/myposts");
+        const { data } = await api.get("/posts/myposts", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setPosts(data);
       } catch (err) {
         console.error("Error fetching posts:", err.response?.data || err.message);
@@ -32,22 +34,24 @@ const MyPosts = () => {
     };
 
     fetchMyPosts();
-  }, [isLoggedIn]);
+  }, [isLoggedIn, token]);
 
   // Delete post
   const handleDelete = useCallback(
     async (id) => {
       if (!window.confirm("Are you sure you want to delete this post?")) return;
       try {
-        await api.delete(`/posts/${id}`);
+        await api.delete(`/posts/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setPosts((prev) => prev.filter((post) => post._id !== id));
-        toast.success("Post deleted successfully!");
+        toast.error("Post deleted successfully!");
       } catch (err) {
         console.error("Error deleting post:", err.response?.data || err.message);
         toast.error("Failed to delete post");
       }
     },
-    []
+    [token]
   );
 
   // Edit post
@@ -81,31 +85,39 @@ const MyPosts = () => {
       <BackButton fallback="/" className="back-button" />
       <h2>My Posts</h2>
       <div className="posts-list">
-        {posts.map((post) => (
-          <div key={post._id} className="post-card">
-            <div className="img-div">
-              {post.image && (
-                <img src={`http://localhost:5000${post.image}`} alt={post.title} />
-              )}
-            </div>
-            <div className="post-info">
-              <h3>{post.title}</h3>
-              <p>{post.subtitle}</p>
-              <p>
-                <strong>Category:</strong> {post.category || "N/A"}
-              </p>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: post.content?.substring(0, 100),
-                }}
-              />
-              <div className="post-actions">
-                <button onClick={() => handleEdit(post._id)}>Edit</button>
-                <button onClick={() => handleDelete(post._id)}>Delete</button>
+        {posts.map((post) => {
+          // Determine image URL
+          const imageUrl =
+            post.image?.startsWith("http") // Cloudinary URL check
+              ? post.image
+              : post.image
+              ? `http://localhost:5000${post.image}`
+              : "/default-image.jpg"; // fallback
+
+          return (
+            <div key={post._id} className="post-card">
+              <div className="img-div">
+                <img src={imageUrl} alt={post.title || "blog-image"} />
+              </div>
+              <div className="post-info">
+                <h3>{post.title}</h3>
+                <p>{post.subtitle}</p>
+                <p>
+                  <strong>Category:</strong> {post.category || "N/A"}
+                </p>
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: post.content?.substring(0, 100) || "",
+                  }}
+                />
+                <div className="post-actions">
+                  <button onClick={() => handleEdit(post._id)}>Edit</button>
+                  <button onClick={() => handleDelete(post._id)}>Delete</button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <ToastContainer

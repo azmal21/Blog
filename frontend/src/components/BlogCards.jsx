@@ -8,9 +8,12 @@ const BlogCard = ({ post }) => {
 
   const imageUrl = post.image
     ? post.image.startsWith("http")
-      ? post.image
-      : `http://localhost:5000${post.image}`
+      ? post.image // Cloudinary URL
+      : post.image // fallback to local uploads, will prepend server URL below
+        ? `http://localhost:5000${post.image}`
+        : "/default-image.jpg"
     : "/default-image.jpg";
+
 
   return (
     <Link to={`/post/${post._id}`} style={{ textDecoration: "none" }}>

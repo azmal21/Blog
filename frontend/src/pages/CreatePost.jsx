@@ -25,6 +25,8 @@ const CreatePost = () => {
   const [isCustomCategory, setIsCustomCategory] = useState(false);
   const [customCategory, setCustomCategory] = useState("");
   const [authChecked, setAuthChecked] = useState(false);
+  const [loadingPost, setLoadingPost] = useState(false);
+
   const imageRef = useRef();
   const navigate = useNavigate();
 
@@ -121,6 +123,7 @@ const CreatePost = () => {
     async (e) => {
       e.preventDefault();
       try {
+        setLoadingPost(true);
         const data = new FormData();
         for (const key in formData) data.append(key, formData[key]);
         if (image) data.append("image", image);
@@ -141,9 +144,11 @@ const CreatePost = () => {
         setIsCustomCategory(false);
         setCustomCategory("");
 
-        setTimeout(() => navigate("/"), 1500);
+        setTimeout(() => navigate("/"), 3000);
       } catch (err) {
         toast.error(err.response?.data?.message || "Error creating post");
+      } finally {
+        setLoadingPost(false);
       }
     },
     [formData, image, navigate]
@@ -160,7 +165,7 @@ const CreatePost = () => {
 
   return (
     <div className="create-post-container">
-      <BackButton fallback="/" className="back-button"/>
+      <BackButton fallback="/" className="back-button" />
       <h2>Create New Post</h2>
 
       <form onSubmit={handleSubmit}>
@@ -242,7 +247,10 @@ const CreatePost = () => {
 
         <input type="file" onChange={handleImageChange} ref={imageRef} />
 
-        <button type="submit">Create Post</button>
+        <button type="submit" disabled={loadingPost}>
+          {loadingPost ? "Creating Post..." : "Create Post"}
+        </button>
+
       </form>
 
       <ToastContainer

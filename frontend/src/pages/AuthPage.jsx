@@ -109,7 +109,7 @@ const AuthPage = () => {
         localStorage.setItem("token", data.token);
         localStorage.setItem("username", data.username);
         toast.success("Login successful!");
-        setTimeout(() => navigate("/"), 1200);
+        setTimeout(() => navigate("/"), 3000);
       }
 
       else if (mode === "forgot") {
