@@ -5,9 +5,6 @@ import Notification from "../models/Notification.js";
 // Create a new post
 export const createPost = async (req, res) => {
   try {
-    console.log("req.body:", req.body);
-    console.log("req.file:", req.file);
-
     const { title, subtitle, content, category, tags } = req.body;
 
     const imageUrl = req.file?.path || null; // Cloudinary URL
@@ -157,3 +154,4 @@ export const toggleLike = async (req, res) => {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
+
