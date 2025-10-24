@@ -7,4 +7,4 @@ router.get('/posts/:postId/comments', commentController.getCommentsById);
 
 router.post('/posts/:postId/comments', auth, commentController.createComment);
 
-module.exports = router
+export default router;
