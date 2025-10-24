@@ -1,10 +1,14 @@
-const express = require("express");
+// routes/commentRoutes.js
+import express from "express";
+import authMiddleware from "../middleware/authMiddleware.js";
+import { getCommentsById, createComment } from "../controllers/commentController.js";
+
 const router = express.Router();
-const auth = require('../middleware/authMiddleware');
-const commentController = require("../controllers/commentController");
 
-router.get('/posts/:postId/comments', commentController.getCommentsById);
+// Get comments for a post
+router.get("/posts/:postId/comments", getCommentsById);
 
-router.post('/posts/:postId/comments', auth, commentController.createComment);
+// Create a comment (requires auth)
+router.post("/posts/:postId/comments", authMiddleware, createComment);
 
 export default router;
