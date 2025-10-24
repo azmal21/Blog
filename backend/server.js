@@ -33,11 +33,15 @@ const isDev = process.env.NODE_ENV !== "production";
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173",
-            "https://blog-1wn99omtt-mahammadazmal21-9335s-projects.vercel.app"], 
-    credentials: true, // if using cookies, JWT, etc.
+    origin: [
+      "http://localhost:5173",
+      "https://blog-1wn99omtt-mahammadazmal21-9335s-projects.vercel.app",
+      "https://writeer.vercel.app"
+    ],
+    credentials: true,
   })
 );
+
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
@@ -66,4 +70,5 @@ mongoose
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
 
