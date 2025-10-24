@@ -10,7 +10,7 @@ const BlogCard = ({ post }) => {
     ? post.image.startsWith("http")
       ? post.image // Cloudinary URL
       : post.image // fallback to local uploads, will prepend server URL below
-        ? `http://localhost:5000${post.image}`
+        ? `https://writeer-blog.onrender.com${post.image}`
         : "/default-image.jpg"
     : "/default-image.jpg";
 
@@ -47,3 +47,4 @@ const BlogCard = ({ post }) => {
 };
 
 export default BlogCard;
+
