@@ -11,4 +11,6 @@ router.post("/login", loginUser);
 router.post("/forgot-password", sendForgotOtp);
 router.post("/reset-password", resetPasswordWithOtp);
 
-module.exports = router;
+export default router;
+
+
