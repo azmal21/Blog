@@ -1,5 +1,5 @@
 import express from "express";
-import { sendOtp, verifyOtpAndRegister, loginUser, sendForgotOtp, resetPasswordWithOtp } from "../controllers/authController";
+import { sendOtp, verifyOtpAndRegister, loginUser, sendForgotOtp, resetPasswordWithOtp } from "../controllers/authController.js";
 const router = express.Router();
 
 // Registration + Login
@@ -12,6 +12,7 @@ router.post("/forgot-password", sendForgotOtp);
 router.post("/reset-password", resetPasswordWithOtp);
 
 export default router;
+
 
 
 
