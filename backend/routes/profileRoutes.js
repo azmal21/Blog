@@ -7,4 +7,5 @@ router.get("/me", authMiddleware, getMyProfile);
 
 router.put("/update-bio", authMiddleware, updateBio);
 
-module.exports = router;
+export default router;
+
