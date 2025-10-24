@@ -1,8 +1,7 @@
-// controllers/ProfileController.js
-const User = require("../models/User");
+import User from "../models/User.js";
 
 // ✅ Get user profile
-const getMyProfile = async (req, res) => {
+export const getMyProfile = async (req, res) => {
   try {
     const user = req.user;
 
@@ -18,7 +17,7 @@ const getMyProfile = async (req, res) => {
 };
 
 // ✅ Update user bio
-const updateBio = async (req, res) => {
+export const updateBio = async (req, res) => {
   try {
     const { bio } = req.body;
 
@@ -41,5 +40,3 @@ const updateBio = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
-module.exports = { getMyProfile, updateBio };
