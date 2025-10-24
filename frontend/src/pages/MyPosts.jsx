@@ -91,7 +91,7 @@ const MyPosts = () => {
             post.image?.startsWith("http") // Cloudinary URL check
               ? post.image
               : post.image
-              ? `http://localhost:5000${post.image}`
+              ? `https://writeer-blog.onrender.com${post.image}`
               : "/default-image.jpg"; // fallback
 
           return (
@@ -133,3 +133,4 @@ const MyPosts = () => {
 };
 
 export default MyPosts;
+
