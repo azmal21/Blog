@@ -244,8 +244,8 @@ const CreatePost = () => {
           onChange={handleChange}
           required
         />
-
-        <input type="file" onChange={handleImageChange} ref={imageRef} />
+        
+       <input type="file" name="image" onChange={handleImageChange} ref={imageRef} />
 
         <button type="submit" disabled={loadingPost}>
           {loadingPost ? "Creating Post..." : "Create Post"}
@@ -266,3 +266,4 @@ const CreatePost = () => {
 };
 
 export default CreatePost;
+
