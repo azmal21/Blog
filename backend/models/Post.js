@@ -12,4 +12,5 @@ const postSchema = new mongoose.Schema({
     views: { type: Number, default: 0}
 }, { timestamps: true});
 
-module.exports = mongoose.model('Post', postSchema);
+const Post = mongoose.model('Post', postSchema);
+export default Post;
