@@ -11,14 +11,18 @@ dotenv.config();
 // Nodemailer transporter
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
+  port: 587,
+  secure: false, // use TLS
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  tls: { rejectUnauthorized: false },
 });
+
+
+console.log("EMAIL_USER:", process.env.EMAIL_USER);
+console.log("EMAIL_PASS:", process.env.EMAIL_PASS ? "exists" : "missing");
+
 
 // -------------------- REGISTER OTP --------------------
 export const sendOtp = async (req, res) => {
@@ -182,3 +186,4 @@ export const resetPasswordWithOtp = async (req, res) => {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
+
