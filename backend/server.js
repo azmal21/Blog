@@ -32,30 +32,32 @@ const isDev = process.env.NODE_ENV !== "production";
 // Middleware
 app.use(express.json());
 
-// ✅ Allow localhost + all vercel.app subdomains + your specific deployed frontend
+// ✅ Allow localhost + vercel.app + your deployed backend domain
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://writeer.vercel.app", // your real frontend
+  "https://writeer.vercel.app",
   "https://writeer-git-main-mahammadazmal21-9335s-projects.vercel.app",
+  "https://blog-coz5.onrender.com", // ✅ add your Render backend
 ];
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (
-        !origin || 
-        allowedOrigins.includes(origin) || 
-        /\.vercel\.app$/.test(origin)
-      ) {
-        callback(null, true);
-      } else {
-        console.log("❌ Blocked by CORS:", origin);
-        callback(new Error("Not allowed by CORS"));
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin) || /\.vercel\.app$/.test(origin)) {
+        return callback(null, true);
       }
+      console.log("❌ Blocked by CORS:", origin);
+      return callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
   })
 );
+
+// ✅ Health check route (to test deployment)
+app.get("/", (req, res) => {
+  res.send("✅ Backend is live and running fine!");
+});
 
 // Static uploads
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
@@ -74,8 +76,6 @@ app.use("/api/feedback", feedbackRoutes);
 // MongoDB connection
 mongoose
   .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
     ssl: true,
     tlsAllowInvalidCertificates: isDev,
   })
