@@ -37,7 +37,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "https://writeer.vercel.app",
   "https://writeer-git-main-mahammadazmal21-9335s-projects.vercel.app",
-  "https://blog-coz5.onrender.com", // ✅ add your Render backend
+  "https://writeer-gko4jx3ra-mahammadazmal21-9335s-projects.vercel.app",
 ];
 
 app.use(
@@ -85,3 +85,4 @@ mongoose
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
