@@ -33,7 +33,7 @@ const isDev = process.env.NODE_ENV !== "production";
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://writeer-gko4jx3ra-mahammadazmal21-9335s-projects.vercel.app",
+    origin: "writeer-git-main-mahammadazmal21-9335s-projects.vercel.app",
     credentials: true,
   })
 );
@@ -68,6 +68,7 @@ mongoose
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
 
 
 
