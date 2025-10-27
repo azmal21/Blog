@@ -31,12 +31,31 @@ const isDev = process.env.NODE_ENV !== "production";
 
 // Middleware
 app.use(express.json());
+
+const allowedOrigins = [
+  "http://localhost:5173", // local development
+  "https://writeer-git-main-mahammadazmal21-9335s-projects.vercel.app", // your main Vercel site
+];
+
+// ✅ Allow both specific domains and any vercel.app subdomains (safe)
 app.use(
   cors({
-    origin: "writeer-git-main-mahammadazmal21-9335s-projects.vercel.app",
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // allow mobile/postman requests
+      if (
+        allowedOrigins.includes(origin) ||
+        /\.vercel\.app$/.test(origin) // any subdomain of vercel.app
+      ) {
+        callback(null, true);
+      } else {
+        console.log("❌ Blocked by CORS:", origin);
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
+
 
 
 
@@ -68,6 +87,7 @@ mongoose
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
 
 
 
