@@ -126,7 +126,7 @@ const SinglePost = () => {
   const getPostImageUrl = (image) => {
     if (!image) return "/default-image.jpg"; // fallback default
     if (image.startsWith("http")) return image; // Cloudinary URL
-    return `https://writeer-blog.onrender.com${image}`; // Local uploads fallback
+    return `https://blog-coz5.onrender.com${image}`; // Local uploads fallback
   };
 
 
@@ -206,4 +206,5 @@ const SinglePost = () => {
 };
 
 export default SinglePost;
+
 
