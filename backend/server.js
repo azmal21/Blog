@@ -32,19 +32,20 @@ const isDev = process.env.NODE_ENV !== "production";
 // Middleware
 app.use(express.json());
 
+// ✅ Allow localhost + all vercel.app subdomains + your specific deployed frontend
 const allowedOrigins = [
-  "http://localhost:5173", // local development
-  "https://writeer-git-main-mahammadazmal21-9335s-projects.vercel.app", // your main Vercel site
+  "http://localhost:5173",
+  "https://writeer.vercel.app", // your real frontend
+  "https://writeer-git-main-mahammadazmal21-9335s-projects.vercel.app",
 ];
 
-// ✅ Allow both specific domains and any vercel.app subdomains (safe)
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin) return callback(null, true); // allow mobile/postman requests
       if (
-        allowedOrigins.includes(origin) ||
-        /\.vercel\.app$/.test(origin) // any subdomain of vercel.app
+        !origin || 
+        allowedOrigins.includes(origin) || 
+        /\.vercel\.app$/.test(origin)
       ) {
         callback(null, true);
       } else {
@@ -56,10 +57,7 @@ app.use(
   })
 );
 
-
-
-
-
+// Static uploads
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes
@@ -78,8 +76,8 @@ mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    ssl: true, // Enable TLS/SSL
-    tlsAllowInvalidCertificates: isDev, // Allow invalid certificates in development only
+    ssl: true,
+    tlsAllowInvalidCertificates: isDev,
   })
   .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
@@ -87,11 +85,3 @@ mongoose
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
-
-
-
-
-
-
-
-
