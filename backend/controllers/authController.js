@@ -7,8 +7,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-console.log("EMAIL_USER:", process.env.EMAIL_USER);
-console.log("BREVO_API_KEY:", process.env.BREVO_API_KEY ? "Loaded ✅" : "Missing ❌");
+// console.log("EMAIL_USER:", process.env.EMAIL_USER);
+// console.log("BREVO_API_KEY:", process.env.BREVO_API_KEY ? "Loaded ✅" : "Missing ❌");
 
 // -------------------- EMAIL TRANSPORTER (Brevo SMTP) --------------------
 const transporter = nodemailer.createTransport({
@@ -20,7 +20,7 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASS,
   },
   tls: {
-    rejectUnauthorized: false, 
+    rejectUnauthorized: false, // ✅ Ignore self-signed certificate errors
   },
 });
 
@@ -38,7 +38,7 @@ transporter.verify((error, success) => {
 // -------------------- HELPER FUNCTION: SEND EMAIL --------------------
 const sendEmail = async (to, subject, html) => {
   const mailOptions = {
-    from: `"Writeer Team" <${process.env.EMAIL_USER}>`,
+    from: process.env.FROM_EMAIL,
     to,
     subject,
     html,
@@ -84,7 +84,8 @@ export const sendOtp = async (req, res) => {
       </div>
     `;
 
-    await sendEmail(email, "Writeer Verification Code - Secure Your Account", html);
+   await sendEmail(email, "Writeer Verification Code - Secure Your Account", html);
+  
     res.status(200).json({ message: "OTP sent successfully" });
   } catch (err) {
     console.error("OTP send error:", err);
