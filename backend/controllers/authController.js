@@ -2,56 +2,10 @@ import User from "../models/User.js";
 import Otp from "../models/Otp.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import nodemailer from "nodemailer";
 import dotenv from "dotenv";
+import { sendEmail } from "../utils/emailService.js";
 
 dotenv.config();
-
-// console.log("EMAIL_USER:", process.env.EMAIL_USER);
-// console.log("BREVO_API_KEY:", process.env.BREVO_API_KEY ? "Loaded ✅" : "Missing ❌");
-
-// -------------------- EMAIL TRANSPORTER (Brevo SMTP) --------------------
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
-  secure: false, // use STARTTLS (port 587)
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-  tls: {
-    rejectUnauthorized: false, // ✅ Ignore self-signed certificate errors
-  },
-});
-
-
-transporter.verify((error, success) => {
-  if (error) {
-    console.error("SMTP Connection Error:", error);
-  } else {
-    console.log("✅ SMTP Server is ready to send emails");
-  }
-});
-
-
-
-// -------------------- HELPER FUNCTION: SEND EMAIL --------------------
-const sendEmail = async (to, subject, html) => {
-  const mailOptions = {
-    from: process.env.FROM_EMAIL,
-    to,
-    subject,
-    html,
-  };
-
-  try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log("✅ Email sent:", info.response);
-  } catch (error) {
-    console.error("❌ Email send error:", error.message);
-    throw new Error("Email sending failed");
-  }
-};
 
 // -------------------- REGISTER OTP --------------------
 export const sendOtp = async (req, res) => {
@@ -84,8 +38,8 @@ export const sendOtp = async (req, res) => {
       </div>
     `;
 
-   await sendEmail(email, "Writeer Verification Code - Secure Your Account", html);
-  
+    await sendEmail(email, "Writeer Verification Code - Secure Your Account", html);
+
     res.status(200).json({ message: "OTP sent successfully" });
   } catch (err) {
     console.error("OTP send error:", err);
@@ -103,7 +57,6 @@ export const verifyOtpAndRegister = async (req, res) => {
       return res.status(400).json({ message: "Invalid or expired OTP" });
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
     const user = new User({ username, email, password: hashedPassword });
     await user.save();
 
@@ -199,9 +152,7 @@ export const resetPasswordWithOtp = async (req, res) => {
 
     await Otp.deleteMany({ email });
 
-    res
-      .status(200)
-      .json({ message: "Password reset successful. Please login again." });
+    res.status(200).json({ message: "Password reset successful. Please login again." });
   } catch (err) {
     console.error("Reset password error:", err);
     res.status(500).json({ message: "Server error", error: err.message });
