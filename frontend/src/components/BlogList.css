@@ -143,8 +143,9 @@ body.dark .post-heading {
     gap: 1.25rem;
   }
 
-  .load-more-btn {
+  /* .load-more-btn {
     width: 100%;
     max-width: 300px;
-  }
+  } */
+
 }
