@@ -54,7 +54,7 @@ function App() {
         <Route path="/my-post" element={<MyPosts />} />
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>
-      <ToastContainer position="top-right" autoClose={3000} theme="colored" />
+      {/* <ToastContainer position="top-right" autoClose={3000} theme="colored" /> */}
     </>
 
 
